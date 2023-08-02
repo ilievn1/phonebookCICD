@@ -28,7 +28,7 @@ jobs:
         run: npm test
       - name: Check style frontend
         working-directory: ./client
-        run: eslint ./src
+        run: npm run lint
       - name: test frontend
         working-directory: ./client
         run: echo "Pretend frontend passed React-testing-library tests"
