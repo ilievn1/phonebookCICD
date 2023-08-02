@@ -26,7 +26,7 @@ jobs:
       - name: Check style backend
         working-directory: ./server
         run: npm run lint
-      - name: test backend 
+      - name: test backend
         working-directory: ./server
         run: npm test
       - name: Check style frontend
@@ -41,7 +41,7 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
-          path: ./server
+          working-directory: ./server
           command: cd ../ && echo ${{ github.workspace }} && npm run test:e2e
           start: npm start
           wait-on: http://localhost:3001
