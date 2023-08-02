@@ -42,6 +42,6 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           working-directory: ./server
-          command: cd ../client && echo ${{ github.workspace }}
-          start: cd ./server && echo ${{ github.workspace }}
+          command: echo ${{ github.workspace }} && npm run test:e2e
+          start: echo ${{ github.workspace }} && npm start
           wait-on: http://localhost:3001
