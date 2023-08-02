@@ -12,7 +12,8 @@
     "logs:prod": "fly logs",
     "lint": "eslint .",
     "test": "NODE_ENV=test jest --verbose --runInBand",
-    "start:test": "NODE_ENV=test node index.js"
+    "start:test": "NODE_ENV=test node index.js",
+    "test:e2e": "cd ../client && npm run test:e2e"
   },
   "author": "Nikolay Iliev",
   "license": "ISC",
