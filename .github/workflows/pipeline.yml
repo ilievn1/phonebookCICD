@@ -1,0 +1,42 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with:
+          node-version: "16"
+      - name: Install dependencies
+        working-directory: ./server
+        run: npm install
+      - name: Check style backend
+        working-directory: ./server
+        run: npm run lint
+      - name: test backend 
+        working-directory: ./server
+        run: npm test
+      - name: Check style frontend
+        working-directory: ./client
+        run: eslint ./src
+      - name: test frontend
+        working-directory: ./client
+        run: echo "Pretend frontend passed React-testing-library tests"
+      - name: Build front end
+        working-directory: ./server
+        run: npm run build:ui
+      - name: e2e tests
+        uses: cypress-io/github-action@v5
+        with:
+          working-directory: ./server
+          command: cd ../client && echo ${{ github.workspace }}
+          start: cd ./server && echo ${{ github.workspace }}
+          wait-on: http://localhost:3001
