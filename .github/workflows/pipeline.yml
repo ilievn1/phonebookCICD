@@ -41,7 +41,7 @@ jobs:
       - name: e2e tests
         uses: cypress-io/github-action@v5
         with:
-          working-directory: ./server
-          command: echo ${{ github.workspace }} && npm run test:e2e
+          working-directory: server
+          command: cd ../ && echo ${{ github.workspace }} && npm run test:e2e
           start: echo ${{ github.workspace }} && npm start
           wait-on: http://localhost:3001
